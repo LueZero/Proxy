@@ -1,37 +1,35 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Xml;
 
 namespace Proxy
 {
-    public class Geonode
+    public class Geonode : Proxy
     {
-        private const string Username = "geonode_HtmfRb2EBu";
-
-        private const string Password = "2b020ad4-0659-4071-89f0-7dcfab185680";
-
-        private const string GeonodeDns = "http://50.47.75.213:5768";
-
-        private const string UrlToGet = "http://ip-api.com/json";
+        private const string Username = "geonode_tGsXR6vkQ8-autoReplace-True";
+        private const string Password = "b98a3a57-5902-4275-8826-f5da2e01e381";
 
         public Geonode()
         {
-            TestPorxyRequest();
+            MyProxyHost = "http://premium-residential.geonode.com";
+            MyProxyPort = 9000;
         }
 
-        public static void TestPorxyRequest()
+        public override async Task<string> GetPorxyRequest()
         {
             using var httpClient = new HttpClient(new HttpClientHandler
             {
-                Proxy = new WebProxy(GeonodeDns),
+                Proxy = new WebProxy(MyProxyHost, MyProxyPort),
                 Credentials = new NetworkCredential(Username, Password)
             });
 
-            using var responseMessage = httpClient.GetAsync(UrlToGet);
+            var responseMessage = await httpClient.GetAsync(TargetUrl);
+            var contentString = await responseMessage.Content.ReadAsStringAsync();
 
-            var contentString = responseMessage.Result;
-
-            Console.ReadKey(true);
+            return contentString;
         }
     }
 }
