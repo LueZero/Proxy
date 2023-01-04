@@ -26,7 +26,7 @@ namespace Proxy
                     httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
         }
 
-        public virtual async Task<string> GetPorxyRequest(Dictionary<string, string> headers = null)
+        public virtual async Task<string> GetProxyRequest(Dictionary<string, string> headers = null)
         {
             httpClient = new HttpClient(new HttpClientHandler { Proxy = new WebProxy(ProxyHost, ProxyPort) });
 

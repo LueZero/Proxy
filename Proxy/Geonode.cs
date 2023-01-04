@@ -8,18 +8,18 @@ using System.Xml;
 
 namespace Proxy
 {
-    public class Geonode : Proxy
+    public class GeoNode : Proxy
     {
         private const string Username = "geonode_tGsXR6vkQ8-autoReplace-True";
         private const string Password = "b98a3a57-5902-4275-8826-f5da2e01e381";
 
-        public Geonode(string proxyHost = "http://premium-residential.geonode.com", int proxyPort = 9000)
+        public GeoNode(string proxyHost = "http://premium-residential.geonode.com", int proxyPort = 9000)
         {
             ProxyHost = proxyHost;
             ProxyPort = proxyPort;
         }
 
-        public override async Task<string> GetPorxyRequest(Dictionary<string, string> headers = null)
+        public override async Task<string> GetProxyRequest(Dictionary<string, string> headers = null)
         {
             using var httpClient = new HttpClient(new HttpClientHandler
             {

@@ -11,7 +11,7 @@ namespace Proxy
 
             Task.Run(async () =>
             {
-                var result = freeProxy.GetPorxyRequest();
+                var result = freeProxy.GetProxyRequest();
                 Console.WriteLine("Response:" + result.Result);
                 Console.ReadKey(true);
             }).Wait();
