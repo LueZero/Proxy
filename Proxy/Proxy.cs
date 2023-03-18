@@ -17,22 +17,22 @@ namespace Proxy
 
         public string TargetUrl = "http://ip-api.com/json";
 
-        protected HttpClient httpClient;
+        protected HttpClient HttpClient;
 
         private void SetHeaders(Dictionary<string, string> headers)
         {
             if (headers != null)
                 foreach (var header in headers)
-                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    HttpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
         }
 
         public virtual async Task<string> GetProxyRequest(Dictionary<string, string> headers = null)
         {
-            httpClient = new HttpClient(new HttpClientHandler { Proxy = new WebProxy(ProxyHost, ProxyPort) });
+            HttpClient = new HttpClient(new HttpClientHandler { Proxy = new WebProxy(ProxyHost, ProxyPort) });
 
             SetHeaders(headers);
 
-            var responseMessage = await httpClient.GetAsync(TargetUrl);
+            var responseMessage = await HttpClient.GetAsync(TargetUrl);
             var contentString = await responseMessage.Content.ReadAsStringAsync();
 
             return contentString;
@@ -40,11 +40,11 @@ namespace Proxy
 
         public virtual async Task<string> PostPorxyRequest(HttpContent content, Dictionary<string, string> headers = null)
         {
-            httpClient = new HttpClient(new HttpClientHandler { Proxy = new WebProxy(ProxyHost, ProxyPort) });
+            HttpClient = new HttpClient(new HttpClientHandler { Proxy = new WebProxy(ProxyHost, ProxyPort) });
 
             SetHeaders(headers);
 
-            var responseMessage = await httpClient.PostAsync(TargetUrl, content);
+            var responseMessage = await HttpClient.PostAsync(TargetUrl, content);
             var contentString = await responseMessage.Content.ReadAsStringAsync();
 
             return contentString;
