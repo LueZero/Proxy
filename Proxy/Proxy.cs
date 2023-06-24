@@ -38,13 +38,22 @@ namespace Proxy
             return contentString;
         }
 
-        public virtual async Task<string> PostPorxyRequest(HttpContent content, Dictionary<string, string> headers = null)
+        public virtual async Task<string> PostProxyRequest(HttpContent content, Dictionary<string, string> headers = null)
         {
             HttpClient = new HttpClient(new HttpClientHandler { Proxy = new WebProxy(ProxyHost, ProxyPort) });
 
             SetHeaders(headers);
 
             var responseMessage = await HttpClient.PostAsync(TargetUrl, content);
+            var contentString = await responseMessage.Content.ReadAsStringAsync();
+
+            return contentString;
+        }
+
+        public virtual async Task<string> GetIps(HttpContent content)
+        {
+            var responseMessage = await HttpClient.PostAsync(TargetUrl, content);
+
             var contentString = await responseMessage.Content.ReadAsStringAsync();
 
             return contentString;

@@ -10,7 +10,7 @@ namespace Proxy
 {
     class FreeProxy : Proxy
     {
-        public FreeProxy(string proxyHost = "161.35.223.83", int proxyPort = 80)
+        public FreeProxy(string proxyHost = "93.20.25.100", int proxyPort = 80)
         {
             // https://www.freeproxylists.net/zh/
             ProxyHost = proxyHost;
